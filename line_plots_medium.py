@@ -1,10 +1,14 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import csv
+import time
 
+start_time = time.time()
 # Read the data into a pandas DataFrame.
 # Dataset with 1000 records
 vehicle_data = pd.read_csv("medium_dataset.csv")
+print "Loading dataset took %s seconds" % (time.time() - start_time)
+start_time = time.time()
 
 # You typically want your plot to be ~1.33x wider than tall. This plot is a rare
 # exception because of the number of lines being plotted on it.
@@ -69,3 +73,5 @@ plt.text(2006, -10000,
          fontsize=10)
 
 plt.savefig("vehicles_medium.png", bbox_inches="tight")
+
+print "Visualisation took %s seconds" % (time.time() - start_time)

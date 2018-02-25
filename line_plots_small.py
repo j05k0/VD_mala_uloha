@@ -1,10 +1,14 @@
 import csv
 import matplotlib.pyplot as plt
 import pandas as pd
+import time
 
+start_time = time.time()
 # Read the data into a pandas DataFrame.
 # Dataset with 100 records
 vehicle_data = pd.read_csv("small_dataset.csv")
+print "Loading dataset took %s seconds" % (time.time() - start_time)
+start_time = time.time()
 
 # You typically want your plot to be ~1.33x wider than tall. This plot is a rare
 # exception because of the number of lines being plotted on it.  
@@ -49,17 +53,12 @@ with open('small_dataset.csv', 'rb') as medium:
     row = next(reader)
     majors = row[1:len(row)]
 
-for rank, column in enumerate(majors):  
-    # Plot each line separately with its own color.
+for rank, column in enumerate(majors):
     plt.plot(vehicle_data.Year.values,
              vehicle_data[column].values,
              lw=2.5)
-
-    # Add a text label to the right end of every line.
+    # Position of the car make name
     y_pos = vehicle_data[column].values[-1] - 0.5
-
-    # Again, make sure that all labels are large enough to be easily read  
-    # by the viewer.  
     plt.text(2017.5, y_pos, column, fontsize=14)
 
 plt.text(2013, 165000, "Yearly vehicle registration transfers by make in Australia, Queensland", fontsize=17, ha="center")
@@ -70,3 +69,4 @@ plt.text(2006, -10000,
 
 plt.savefig("vehicles_small.png", bbox_inches="tight")
 
+print "Visualisation took %s seconds" % (time.time() - start_time)
